@@ -22,7 +22,7 @@ As this guide is an extension of the [Christopher Adams Elixir Style Guide](http
   * [GraphQL Schema](##graphql-schema)
 * __[Regular Expressions](#regular-expressions)__
   * [Aliases](#aliases)
-  * ['With do' Organization](#with-do-organization)
+  * ['With do' Indentation](#with-do-indentation)
 
 # Formatting
 ## Breaking Lines
@@ -69,7 +69,7 @@ map = %{a: 1, b: 2, c: 3}
 
 ## Blank Lines
 
-Blank lines are important in some cases, but in some others can make the code more unreadable.
+Blank lines are important in some cases, but in some others can make the code less readable.
 The examples below will give more details about this.
 
 #### Module
@@ -348,7 +348,7 @@ alias Jungsoft.Module2.SubModule1.{
 
 [Back to top ⬆️](#table-of-contents)
 
-## 'With do' Organization
+## 'With do' Indentation
 
 #### Space
 
