@@ -46,7 +46,24 @@ list = [
 list = ["value1", "value2", "value3"]
 ```
 
-**This is also valid for Maps and Keyword Lists.**
+```elixir
+# ❌ Bad
+map = %{a: 1, b: 2, c: 3, d: 4}
+
+
+# ✅ Good
+map = %{
+  a: 1,
+  b: 2,
+  c: 3,
+  d: 4,
+}
+
+# ✅ Good
+map = %{a: 1, b: 2, c: 3}
+```
+
+**This is also valid for Keyword Lists.**
 
 [Back to top ⬆️](#table-of-contents)
 
