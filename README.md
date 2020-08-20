@@ -13,18 +13,17 @@ As this guide is an extension of the [Christopher Adams Elixir Style Guide](http
 
 # Table of Contents
 
-* __[Formatting](#formatting)__
+* __[General Guidelines](#general-guidelines)__
   * [Breaking Lines](#breaking-lines)
   * [Blank Lines](#blank-lines)
   * [Dangling Commas](#dangling-commas)
+  * [Aliases](#aliases)
+  * ['With do' Indentation](#with-do-indentation)
 * __[Schemas](#schemas)__
   * [Ecto Schema](##ecto-schema)
   * [GraphQL Schema](##graphql-schema)
-* __[Regular Expressions](#regular-expressions)__
-  * [Aliases](#aliases)
-  * ['With do' Indentation](#with-do-indentation)
 
-# Formatting
+# General Guidelines
 ## Breaking Lines
 
 When an enumerable contains more than 3 arguments, it should be broken into multiple lines. See an example for Lists below.
@@ -232,72 +231,6 @@ alias Jungsoft.{
 
 **This is also valid for Maps, Lists and Keyword Lists.**
 
-[Back to top ⬆️](#table-of-contents)
-
-# Schemas
-
-The schemas should respect a pattern for organizing the parameters.
-
-Independent of the schema type, the parameters should be grouped by type:
-```elixir
-# ❌ Bad
-schema "foo" do
-  field :name, :string
-
-  field :age, :integer
-
-  has_one :one, Bar
-
-  has_one :two, Module
-  timestamps()
-end
-
-
-# ✅ Good
-schema "foo" do
-  field :name, :string
-  field :age, :integer
-
-  has_one :one, Bar
-  has_one :two, Module
-
-  timestamps()
-end
-```
-
-The other patterns are different based on the type of schema (Ecto or GraphQL). These differences are listed below.
-
-## Ecto Schema
-
-The Ecto schema parameters need to be organized in a order of importance:
-
-| Importance | Field |
-|---|---|
-| 1º | field |
-| 2º | belongs_to |
-| 3º | has_one |
-| 4º | has_many |
-| 5º | timestamps |
-
-In this way, `field` should be inserted before `belongs_to`, and so on.
-
-## GraphQL Schema
-
-The GraphQL schema parameters need to be organized in a order of importance:
-
-| Importance | Field |
-|---|---|
-| 1º | normal fields |
-| 2º | custom fields (with the `resolve`) |
-| 3º | associations |
-
-In this way, `normal fields` should be inserted before `custom fields`, and so on.
-
-Remember, the first schema rule should be respected here as well (see [here](#schemas)). Therefore, `normal fields` should be grouped and separated with a blank space. Same is valid with `custom fields` and `associations`.
-
-[Back to top ⬆️](#table-of-contents)
-
-# Regular Expressions
 ## Aliases
 
 #### Ordering
@@ -387,5 +320,68 @@ with true <- Jungsoft.function_1() do
   ## DO SOMETHING
 end
 ```
+
+[Back to top ⬆️](#table-of-contents)
+
+# Schemas
+
+The schemas should respect a pattern for organizing the parameters.
+
+Independent of the schema type, the parameters should be grouped by type:
+```elixir
+# ❌ Bad
+schema "foo" do
+  field :name, :string
+
+  field :age, :integer
+
+  has_one :one, Bar
+
+  has_one :two, Module
+  timestamps()
+end
+
+
+# ✅ Good
+schema "foo" do
+  field :name, :string
+  field :age, :integer
+
+  has_one :one, Bar
+  has_one :two, Module
+
+  timestamps()
+end
+```
+
+The other patterns are different based on the type of schema (Ecto or GraphQL). These differences are listed below.
+
+## Ecto Schema
+
+The Ecto schema parameters need to be organized in a order of importance:
+
+| Importance | Field |
+|---|---|
+| 1º | field |
+| 2º | belongs_to |
+| 3º | has_one |
+| 4º | has_many |
+| 5º | timestamps |
+
+In this way, `field` should be inserted before `belongs_to`, and so on.
+
+## GraphQL Schema
+
+The GraphQL schema parameters need to be organized in a order of importance:
+
+| Importance | Field |
+|---|---|
+| 1º | normal fields |
+| 2º | custom fields (with the `resolve`) |
+| 3º | associations |
+
+In this way, `normal fields` should be inserted before `custom fields`, and so on.
+
+Remember, the first schema rule should be respected here as well (see [here](#schemas)). Therefore, `normal fields` should be grouped and separated with a blank space. Same is valid with `custom fields` and `associations`.
 
 [Back to top ⬆️](#table-of-contents)
