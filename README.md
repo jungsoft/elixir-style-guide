@@ -4,7 +4,7 @@
 
 Welcome to Jungsoft's Elixir Style Guide. Sit down, have a cup of coffee and read this calmly. ☕
 
-## Indroduction
+## Introduction
 
 The goal of this guide is to help our team to understand and
 follow code style best practices, maintaining a pattern.
