@@ -14,55 +14,63 @@ As this guide is an extension of the [Christopher Adams Elixir Style Guide](http
 # Table of Contents
 
 * __[General Guidelines](#general-guidelines)__
-  * [Breaking Lines](#breaking-lines)
-  * [Blank Lines](#blank-lines)
-  * [Dangling Commas](#dangling-commas)
   * [Aliases](#aliases)
+  * [Blank Lines](#blank-lines)
+  * [Breaking Lines](#breaking-lines)
+  * [Dangling Commas](#dangling-commas)
   * ['With do' Indentation](#with-do-indentation)
 * __[Schemas](#schemas)__
   * [Ecto Schema](##ecto-schema)
   * [GraphQL Schema](##graphql-schema)
 
 # General Guidelines
-## Breaking Lines
+## Aliases
 
-When an enumerable contains more than 3 arguments, it should be broken into multiple lines. See an example for Lists below.
+#### Ordering
 
-```elixir
-# ❌ Bad
-list = ["value1", "value2", "value3", "value4"]
-
-
-# ✅ Good
-list = [
-  "value1",
-  "value2",
-  "value3",
-  "value4",
-]
-
-# ✅ Good
-list = ["value1", "value2", "value3"]
-```
+The aliases should be ordered alphabetically.
 
 ```elixir
 # ❌ Bad
-map = %{a: 1, b: 2, c: 3, d: 4}
-
-
-# ✅ Good
-map = %{
-  a: 1,
-  b: 2,
-  c: 3,
-  d: 4,
+alias Jungsoft.{
+  CModule,
+  BModule,
+  AModule,
 }
 
+
 # ✅ Good
-map = %{a: 1, b: 2, c: 3}
+alias Jungsoft.{
+  AModule,
+  BModule,
+  CModule,
+}
 ```
 
-**This is also valid for Keyword Lists.**
+#### SubModules
+
+The aliases should contain only one 'sub-module'.
+
+```elixir
+# ❌ Bad
+alias Jungsoft.{
+  Module1.SubModule1,
+  Module1.SubModule2,
+  Module2.SubModule1.SubSubModule1,
+  Module2.SubModule1.SubSubModule2,
+}
+
+
+# ✅ Good
+alias Jungsoft.Module1.{
+  SubModule1,
+  SubModule2,
+}
+alias Jungsoft.Module2.SubModule1.{
+  SubSubModule1,
+  SubSubModule2,
+}
+```
 
 [Back to top ⬆️](#table-of-contents)
 
@@ -210,6 +218,50 @@ end
 
 [Back to top ⬆️](#table-of-contents)
 
+
+## Breaking Lines
+
+When an enumerable contains more than 3 arguments, it should be broken into multiple lines. See an example for Lists below.
+
+```elixir
+# ❌ Bad
+list = ["value1", "value2", "value3", "value4"]
+
+
+# ✅ Good
+list = [
+  "value1",
+  "value2",
+  "value3",
+  "value4",
+]
+
+# ✅ Good
+list = ["value1", "value2", "value3"]
+```
+
+```elixir
+# ❌ Bad
+map = %{a: 1, b: 2, c: 3, d: 4}
+
+
+# ✅ Good
+map = %{
+  a: 1,
+  b: 2,
+  c: 3,
+  d: 4,
+}
+
+# ✅ Good
+map = %{a: 1, b: 2, c: 3}
+```
+
+**This is also valid for Keyword Lists.**
+
+[Back to top ⬆️](#table-of-contents)
+
+
 ## Dangling Commas
 
 Objects with the possibility to span in multiple lines should contain a comma dangle in the last parameter. See an alias example below.
@@ -230,54 +282,6 @@ alias Jungsoft.{
 ```
 
 **This is also valid for Maps, Lists and Keyword Lists.**
-
-## Aliases
-
-#### Ordering
-
-The aliases should be ordered alphabetically.
-
-```elixir
-# ❌ Bad
-alias Jungsoft.{
-  CModule,
-  BModule,
-  AModule,
-}
-
-
-# ✅ Good
-alias Jungsoft.{
-  AModule,
-  BModule,
-  CModule,
-}
-```
-
-#### SubModules
-
-The aliases should contain only one 'sub-module'.
-
-```elixir
-# ❌ Bad
-alias Jungsoft.{
-  Module1.SubModule1,
-  Module1.SubModule2,
-  Module2.SubModule1.SubSubModule1,
-  Module2.SubModule1.SubSubModule2,
-}
-
-
-# ✅ Good
-alias Jungsoft.Module1.{
-  SubModule1,
-  SubModule2,
-}
-alias Jungsoft.Module2.SubModule1.{
-  SubSubModule1,
-  SubSubModule2,
-}
-```
 
 [Back to top ⬆️](#table-of-contents)
 
