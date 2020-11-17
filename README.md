@@ -18,6 +18,7 @@ As this guide is an extension of the [Christopher Adams Elixir Style Guide](http
   * [Blank Lines](#blank-lines)
   * [Breaking Lines](#breaking-lines)
   * [Dangling Commas](#dangling-commas)
+  * [Moduledocs](#moduledocs)
   * ['With do' Indentation](#with-do-indentation)
 * __[Schemas](#schemas)__
   * [Ecto Schema](##ecto-schema)
@@ -282,6 +283,47 @@ alias Jungsoft.{
 ```
 
 **This is also valid for Maps, Lists and Keyword Lists.**
+
+[Back to top ⬆️](#table-of-contents)
+
+## Moduledocs
+
+Modules that are meant to be public and used across the application (e.g. phoenix contexts, ecto schemas) must have a `@moduledoc` with a description (not `false`). Modules that are meant to be private for a specific context (e.g. an adapter for a public service), must have a `@moduledoc false`. See more about this here: https://hexdocs.pm/elixir/writing-documentation.html#hiding-internal-modules-and-functions
+
+
+```elixir
+# ❌ Bad
+defmodule Jungsoft.Accounts do
+  @moduledoc false
+
+  # Public functions for the Accounts context
+end
+
+# ❌ Bad
+defmodule Jungsoft.Storage.S3Adapter do
+  @moduledoc """
+  Adapter for AWS S3
+  """
+
+  # Functions that must be used only in the Storage context
+end
+
+# ✅ Good
+defmodule Jungsoft.Accounts do
+  @moduledoc """
+  The Accounts context that manipulates the users of the application.
+  """
+
+  # Public functions for the Accounts context
+end
+
+# ✅ Good
+defmodule Jungsoft.Storage.S3Adapter do
+  @moduledoc false
+
+  # Functions that must be used only in the Storage context
+end
+```
 
 [Back to top ⬆️](#table-of-contents)
 
