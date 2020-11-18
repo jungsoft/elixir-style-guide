@@ -21,8 +21,8 @@ As this guide is an extension of the [Christopher Adams Elixir Style Guide](http
   * [Moduledocs](#moduledocs)
   * ['With do' Indentation](#with-do-indentation)
 * __[Schemas](#schemas)__
-  * [Ecto Schema](##ecto-schema)
-  * [GraphQL Schema](##graphql-schema)
+  * [Ecto Schema](#ecto-schema)
+  * [GraphQL Schema](#graphql-schema)
 
 # General Guidelines
 ## Aliases
