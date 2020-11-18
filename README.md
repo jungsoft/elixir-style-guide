@@ -14,55 +14,64 @@ As this guide is an extension of the [Christopher Adams Elixir Style Guide](http
 # Table of Contents
 
 * __[General Guidelines](#general-guidelines)__
-  * [Breaking Lines](#breaking-lines)
-  * [Blank Lines](#blank-lines)
-  * [Dangling Commas](#dangling-commas)
   * [Aliases](#aliases)
+  * [Blank Lines](#blank-lines)
+  * [Breaking Lines](#breaking-lines)
+  * [Dangling Commas](#dangling-commas)
+  * [Moduledocs](#moduledocs)
   * ['With do' Indentation](#with-do-indentation)
 * __[Schemas](#schemas)__
-  * [Ecto Schema](##ecto-schema)
-  * [GraphQL Schema](##graphql-schema)
+  * [Ecto Schema](#ecto-schema)
+  * [GraphQL Schema](#graphql-schema)
 
 # General Guidelines
-## Breaking Lines
+## Aliases
 
-When an enumerable contains more than 3 arguments, it should be broken into multiple lines. See an example for Lists below.
+#### Ordering
 
-```elixir
-# ❌ Bad
-list = ["value1", "value2", "value3", "value4"]
-
-
-# ✅ Good
-list = [
-  "value1",
-  "value2",
-  "value3",
-  "value4",
-]
-
-# ✅ Good
-list = ["value1", "value2", "value3"]
-```
+The aliases should be ordered alphabetically.
 
 ```elixir
 # ❌ Bad
-map = %{a: 1, b: 2, c: 3, d: 4}
-
-
-# ✅ Good
-map = %{
-  a: 1,
-  b: 2,
-  c: 3,
-  d: 4,
+alias Jungsoft.{
+  CModule,
+  BModule,
+  AModule,
 }
 
+
 # ✅ Good
-map = %{a: 1, b: 2, c: 3}
+alias Jungsoft.{
+  AModule,
+  BModule,
+  CModule,
+}
 ```
 
-**This is also valid for Keyword Lists.**
+#### SubModules
+
+The aliases should contain only one 'sub-module'.
+
+```elixir
+# ❌ Bad
+alias Jungsoft.{
+  Module1.SubModule1,
+  Module1.SubModule2,
+  Module2.SubModule1.SubSubModule1,
+  Module2.SubModule1.SubSubModule2,
+}
+
+
+# ✅ Good
+alias Jungsoft.Module1.{
+  SubModule1,
+  SubModule2,
+}
+alias Jungsoft.Module2.SubModule1.{
+  SubSubModule1,
+  SubSubModule2,
+}
+```
 
 [Back to top ⬆️](#table-of-contents)
 
@@ -210,6 +219,50 @@ end
 
 [Back to top ⬆️](#table-of-contents)
 
+
+## Breaking Lines
+
+When an enumerable contains more than 3 arguments, it should be broken into multiple lines. See an example for Lists below.
+
+```elixir
+# ❌ Bad
+list = ["value1", "value2", "value3", "value4"]
+
+
+# ✅ Good
+list = [
+  "value1",
+  "value2",
+  "value3",
+  "value4",
+]
+
+# ✅ Good
+list = ["value1", "value2", "value3"]
+```
+
+```elixir
+# ❌ Bad
+map = %{a: 1, b: 2, c: 3, d: 4}
+
+
+# ✅ Good
+map = %{
+  a: 1,
+  b: 2,
+  c: 3,
+  d: 4,
+}
+
+# ✅ Good
+map = %{a: 1, b: 2, c: 3}
+```
+
+**This is also valid for Keyword Lists.**
+
+[Back to top ⬆️](#table-of-contents)
+
+
 ## Dangling Commas
 
 Objects with the possibility to span in multiple lines should contain a comma dangle in the last parameter. See an alias example below.
@@ -231,52 +284,45 @@ alias Jungsoft.{
 
 **This is also valid for Maps, Lists and Keyword Lists.**
 
-## Aliases
+[Back to top ⬆️](#table-of-contents)
 
-#### Ordering
+## Moduledocs
 
-The aliases should be ordered alphabetically.
+Modules that are meant to be public and used across the application (e.g. phoenix contexts, ecto schemas) must have a `@moduledoc` with a description (not `false`). Modules that are meant to be private for a specific context (e.g. an adapter for a public service), must have a `@moduledoc false`. See more about this here: https://hexdocs.pm/elixir/writing-documentation.html#hiding-internal-modules-and-functions
+
 
 ```elixir
 # ❌ Bad
-alias Jungsoft.{
-  CModule,
-  BModule,
-  AModule,
-}
+defmodule Jungsoft.Accounts do
+  @moduledoc false
 
+  # Public functions for the Accounts context
+end
 
-# ✅ Good
-alias Jungsoft.{
-  AModule,
-  BModule,
-  CModule,
-}
-```
-
-#### SubModules
-
-The aliases should contain only one 'sub-module'.
-
-```elixir
 # ❌ Bad
-alias Jungsoft.{
-  Module1.SubModule1,
-  Module1.SubModule2,
-  Module2.SubModule1.SubSubModule1,
-  Module2.SubModule1.SubSubModule2,
-}
+defmodule Jungsoft.Storage.S3Adapter do
+  @moduledoc """
+  Adapter for AWS S3
+  """
 
+  # Functions that must be used only in the Storage context
+end
 
 # ✅ Good
-alias Jungsoft.Module1.{
-  SubModule1,
-  SubModule2,
-}
-alias Jungsoft.Module2.SubModule1.{
-  SubSubModule1,
-  SubSubModule2,
-}
+defmodule Jungsoft.Accounts do
+  @moduledoc """
+  The Accounts context that manipulates the users of the application.
+  """
+
+  # Public functions for the Accounts context
+end
+
+# ✅ Good
+defmodule Jungsoft.Storage.S3Adapter do
+  @moduledoc false
+
+  # Functions that must be used only in the Storage context
+end
 ```
 
 [Back to top ⬆️](#table-of-contents)
