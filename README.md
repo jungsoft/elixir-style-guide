@@ -29,7 +29,7 @@ As this guide is an extension of the [Christopher Adams Elixir Style Guide](http
 
 #### Ordering
 
-The aliases should be ordered alphabetically.
+The aliases should be ordered alphabetically. When there's aliases with different nested levels, first consider alphabetical order and then consider nesting level.
 
 ```elixir
 # ❌ Bad
@@ -39,6 +39,21 @@ alias Jungsoft.{
   AModule,
 }
 
+# ❌ Bad
+alias Jungsoft.AModule.ASubModule
+alias Jungsoft.{
+  BModule,
+  CModule,
+}
+
+# ❌ Bad
+alias Jungsoft.{
+  BModule,
+  CModule,
+}
+alias AModule.ASubModule
+alias Jungsoft.AModule.ASubModule
+
 
 # ✅ Good
 alias Jungsoft.{
@@ -46,6 +61,21 @@ alias Jungsoft.{
   BModule,
   CModule,
 }
+
+# ✅ Good
+alias Jungsoft.{
+  BModule,
+  CModule,
+}
+alias Jungsoft.AModule.ASubModule
+
+# ✅ Good
+alias AModule.ASubModule
+alias Jungsoft.{
+  BModule,
+  CModule,
+}
+alias Jungsoft.AModule.ASubModule
 ```
 
 #### SubModules
