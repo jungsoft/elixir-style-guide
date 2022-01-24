@@ -29,33 +29,24 @@ As this guide is an extension of the [Christopher Adams Elixir Style Guide](http
 
 #### Ordering
 
-The aliases should be ordered alphabetically. When there's aliases with different nested levels, first consider alphabetical order and then consider nesting level.
+The aliases should be ordered alphabetically using the full path as it is easier to add and remove an alias and you do not need to rearrange the groupings.
 
 ```elixir
 # ❌ Bad
 alias Jungsoft.{
-  CModule,
-  BModule,
   AModule,
-}
-
-# ❌ Bad
-alias Jungsoft.AModule.ASubModule
-alias Jungsoft.{
   BModule,
   CModule,
 }
-
-# ❌ Bad
-alias Jungsoft.{
-  BModule,
-  CModule,
-}
-alias AModule.ASubModule
 alias Jungsoft.AModule.ASubModule
-
 
 # ✅ Good
+alias Jungsoft.AModule
+alias Jungsoft.AModule.ASubModule
+alias Jungsoft.BModule
+alias Jungsoft.CModule
+
+# ❌ Bad
 alias Jungsoft.{
   AModule,
   BModule,
@@ -63,44 +54,21 @@ alias Jungsoft.{
 }
 
 # ✅ Good
-alias Jungsoft.{
-  BModule,
-  CModule,
-}
-alias Jungsoft.AModule.ASubModule
+alias Jungsoft.AModule
+alias Jungsoft.BModule
+alias Jungsoft.CModule
 
-# ✅ Good
-alias AModule.ASubModule
-alias Jungsoft.{
-  BModule,
-  CModule,
-}
-alias Jungsoft.AModule.ASubModule
-```
-
-#### SubModules
-
-The aliases should contain only one 'sub-module'.
-
-```elixir
 # ❌ Bad
-alias Jungsoft.{
-  Module1.SubModule1,
-  Module1.SubModule2,
-  Module2.SubModule1.SubSubModule1,
-  Module2.SubModule1.SubSubModule2,
-}
-
+alias Jungsoft.AModule.ASubModule.ASubSubModule
+alias Jungsoft.AModule.ASubModule
+alias Jungsoft.CModule
+alias Jungsoft.BModule
 
 # ✅ Good
-alias Jungsoft.Module1.{
-  SubModule1,
-  SubModule2,
-}
-alias Jungsoft.Module2.SubModule1.{
-  SubSubModule1,
-  SubSubModule2,
-}
+alias Jungsoft.AModule.ASubModule
+alias Jungsoft.AModule.ASubModule.ASubSubModule
+alias Jungsoft.BModule
+alias Jungsoft.CModule
 ```
 
 [Back to top ⬆️](#table-of-contents)
@@ -295,24 +263,27 @@ map = %{a: 1, b: 2, c: 3}
 
 ## Dangling Commas
 
-Objects with the possibility to span in multiple lines should contain a comma dangle in the last parameter. See an alias example below.
+Objects with the possibility to span in multiple lines should contain a comma dangle in the last parameter. See an example of lists below.
 
 ```elixir
 # ❌ Bad
-alias Jungsoft.{
-  Module1,
-  Module2
-}
-
+list = [
+  "value1",
+  "value2",
+  "value3",
+  "value4"
+]
 
 # ✅ Good
-alias Jungsoft.{
-  Module1,
-  Module2,
-}
+list = [
+  "value1",
+  "value2",
+  "value3",
+  "value4",
+]
 ```
 
-**This is also valid for Maps, Lists and Keyword Lists.**
+**This is also valid for Maps and Keyword Lists.**
 
 [Back to top ⬆️](#table-of-contents)
 
